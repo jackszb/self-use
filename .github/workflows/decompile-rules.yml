@@ -1,0 +1,73 @@
+name: 反编译规则集
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  decompile:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v5
+
+      # 1️⃣ 创建 rules2 目录
+      - name: 初始化 rules2 目录
+        run: |
+          mkdir -p rules2
+          if [ ! -f rules2/.gitkeep ]; then
+            touch rules2/.gitkeep
+          fi
+
+      # 2️⃣ 安装 sing-box
+      - name: 安装 sing-box
+        run: |
+          curl -fsSL https://sing-box.app/install.sh | sh -s -- --version 1.13.14
+          sing-box version
+
+      # 3️⃣ 下载 SRS 文件（这里填你的链接）
+      - name: 下载规则集
+        run: |
+          mkdir -p tmp
+          
+          # 👉 在这里改成你的下载地址（支持多个）
+          urls=(
+            "https://raw.githubusercontent.com/jackszb/self-use/main/rules/claude.srs"
+          )
+
+          for url in "${urls[@]}"; do
+            filename=$(basename "$url")
+            echo "下载 $filename"
+            curl -L "$url" -o "tmp/$filename"
+          done
+
+      # 4️⃣ 反编译
+      - name: 反编译 SRS → JSON
+        run: |
+          for file in tmp/*.srs; do
+            [ -f "$file" ] || continue
+
+            name=$(basename "$file" .srs)
+
+            echo "::group::反编译 $file"
+            sing-box rule-set decompile "$file" -o "rules2/${name}.json"
+            echo "::endgroup::"
+          done
+
+      # 5️⃣ 提交结果
+      - name: 提交 JSON 文件
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add rules2/*.json rules2/.gitkeep
+
+          if git diff --cached --quiet; then
+            echo "无变化，跳过提交"
+          else
+            git commit -m "chore: 自动反编译规则集 [skip ci]"
+            git push
+          fi
