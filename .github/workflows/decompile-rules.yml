@@ -36,8 +36,6 @@ jobs:
           # 👉 在这里改成你的下载地址（支持多个）
           urls=(
             "https://raw.githubusercontent.com/jackszb/self-use/main/rules/claude.srs"
-            "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-dmm-porn.srs"
-            "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-category-porn.srs"
           )
 
           for url in "${urls[@]}"; do
