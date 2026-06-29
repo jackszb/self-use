@@ -35,9 +35,7 @@ jobs:
           
           # 👉 在这里改成你的下载地址（支持多个）
           urls=(
-            "https://cdn.jsdelivr.net/gh/jinndi/singbox_ruleset@main/cheburnet.srs"
-            "https://cdn.jsdelivr.net/gh/jinndi/singbox_ruleset@main/filter.srs"
-            "https://cdn.jsdelivr.net/gh/jinndi/singbox_ruleset@main/proxy.srs"
+            "https://raw.githubusercontent.com/getlantern/rulesets/add-cn-ai-domains/srs/cn-ai-domains.srs"
           )
 
           for url in "${urls[@]}"; do
