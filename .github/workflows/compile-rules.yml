@@ -21,23 +21,43 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: 创建 rules 目录
+      # 1️⃣ 初始化 rules 目录
+      - name: 初始化 rules 目录
         run: |
           mkdir -p rules
+          if [ ! -f rules/.gitkeep ]; then
+            touch rules/.gitkeep
+          fi
 
+      # 2️⃣ 提交目录（首次）
+      - name: 提交 rules 目录（首次）
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add rules/.gitkeep
+
+          if git diff --cached --quiet; then
+            echo "rules 目录已存在"
+          else
+            git commit -m "chore: 初始化 rules 目录"
+            git push
+          fi
+
+      # 3️⃣ 安装 sing-box
       - name: 安装 sing-box
         run: |
           curl -fsSL https://sing-box.app/install.sh | sh -s -- --version 1.13.14
           sing-box version
 
+      # 4️⃣ 查找 JSON
       - name: 找出需要编译的 JSON 文件
         id: changed
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             files=$(find rules -name '*.json' | sort)
           elif git cat-file -e "${{ github.event.before }}" 2>/dev/null; then
-            files=$(git diff --name-only --diff-filter=ACMR \
-              ${{ github.event.before }} ${{ github.sha }} -- 'rules/**/*.json' | sort)
+            files=$(git diff --name-only --diff-filter=ACMR ${{ github.event.before }} ${{ github.sha }} -- 'rules/**/*.json' | sort)
           else
             files=$(find rules -name '*.json' | sort)
           fi
@@ -59,8 +79,9 @@ jobs:
             echo "$resolved"
           fi
 
+      # 5️⃣ 编译
       - name: 编译 JSON → SRS
-        if: steps.changed.outputs.count > 0
+        if: steps.changed.outputs.count != '0'
         run: |
           for file in ${{ steps.changed.outputs.files }}; do
             echo "::group::编译 $file"
@@ -68,8 +89,9 @@ jobs:
             echo "::endgroup::"
           done
 
+      # 6️⃣ 提交结果
       - name: 提交 SRS 文件
-        if: steps.changed.outputs.count > 0
+        if: steps.changed.outputs.count != '0'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
