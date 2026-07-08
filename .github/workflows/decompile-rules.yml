@@ -36,6 +36,7 @@ jobs:
           # 👉 在这里改成你的下载地址（支持多个）
           urls=(
             "https://raw.githubusercontent.com/hwsaya/sing-box-rule-set/release/adblocksingbox-no-cn.srs"
+            "https://raw.githubusercontent.com/Danialrostamani/sing-box-rules/main/ads-merged.srs"
           )
 
           for url in "${urls[@]}"; do
