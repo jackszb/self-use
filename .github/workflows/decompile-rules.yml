@@ -38,6 +38,11 @@ jobs:
             "https://raw.githubusercontent.com/hwsaya/sing-box-rule-set/release/adblocksingbox-no-cn.srs",
             "https://github.com/omnius-ols/commensal-builder/releases/download/latest/ads.srs",
             "https://cdn.jsdelivr.net/gh/KaringX/karing-ruleset@sing/geo/geosite/category-ip-geo-detect.srs"
+            "https://raw.githubusercontent.com/niky08/youtube-ios-rules/main/rule-sets/youtube-ipv4.srs"
+            "https://raw.githubusercontent.com/niky08/youtube-ios-rules/main/rule-sets/youtube-ipv6.srs"
+            "https://raw.githubusercontent.com/niky08/youtube-ios-rules/main/rule-sets/youtube-page.srs"
+            "https://raw.githubusercontent.com/niky08/youtube-ios-rules/main/rule-sets/youtube-video.srs"
+            "https://raw.githubusercontent.com/niky08/youtube-ios-rules/main/rule-sets/doh-block.srs"
           )
 
           for url in "${urls[@]}"; do
