@@ -37,7 +37,8 @@ jobs:
           urls=(
             "https://raw.githubusercontent.com/hwsaya/sing-box-rule-set/release/adblocksingbox-no-cn.srs",
             "https://github.com/omnius-ols/commensal-builder/releases/download/latest/ads.srs",
-            "https://cdn.jsdelivr.net/gh/KaringX/karing-ruleset@sing/geo/geosite/category-ip-geo-detect.srs"
+            "https://cdn.jsdelivr.net/gh/KaringX/karing-ruleset@sing/geo/geosite/category-ip-geo-detect.srs",
+            "https://github.com/Kira361323/Dns-rules/releases/download/latest/domains.srs"
           )
 
           for url in "${urls[@]}"; do
