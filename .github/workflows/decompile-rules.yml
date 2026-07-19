@@ -36,7 +36,8 @@ jobs:
           # 👉 在这里改成你的下载地址（支持多个）
           urls=(
             "https://raw.githubusercontent.com/hwsaya/sing-box-rule-set/release/adblocksingbox-no-cn.srs",
-            "https://raw.githubusercontent.com/getlantern/rulesets/main/srs/common.srs"
+            "https://raw.githubusercontent.com/getlantern/rulesets/main/srs/common.srs",
+            "https://raw.githubusercontent.com/getlantern/rulesets/main/srs/cn-ai-domains.srs"
           )
 
           for url in "${urls[@]}"; do
