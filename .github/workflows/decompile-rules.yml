@@ -37,7 +37,9 @@ jobs:
           urls=(
             "https://raw.githubusercontent.com/hwsaya/sing-box-rule-set/release/adblocksingbox-no-cn.srs",
             "https://raw.githubusercontent.com/getlantern/rulesets/main/srs/common.srs",
-            "https://raw.githubusercontent.com/getlantern/rulesets/main/srs/cn-ai-domains.srs"
+            "https://raw.githubusercontent.com/getlantern/rulesets/main/srs/cn-ai-domains.srs",
+            "https://raw.githubusercontent.com/hguandl/sing-chinalist/rule-set/chinalist-apple.srs",
+            "https://raw.githubusercontent.com/hguandl/sing-chinalist/rule-set/chinalist-google.srs"
           )
 
           for url in "${urls[@]}"; do
