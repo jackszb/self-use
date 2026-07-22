@@ -35,7 +35,9 @@ jobs:
           
           # 👉 在这里改成你的下载地址（支持多个）
           urls=(
-            "https://raw.githubusercontent.com/hwsaya/sing-box-rule-set/release/adblocksingbox-no-cn.srs"
+            "https://raw.githubusercontent.com/hwsaya/sing-box-rule-set/release/adblocksingbox-no-cn.srs",
+            "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-category-httpdns-cn.srs",
+            "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-category-httpdns-cn@ads.srs"
           )
 
           for url in "${urls[@]}"; do
