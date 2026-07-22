@@ -47,7 +47,7 @@ jobs:
       # 3️⃣ 安装 sing-box
       - name: 安装 sing-box
         run: |
-          curl -fsSL https://sing-box.app/install.sh | sh -s -- --version 1.13.14
+          curl -fsSL https://sing-box.app/install.sh | sh -s -- --version 1.11.14
           sing-box version
 
       # 4️⃣ 查找 JSON
